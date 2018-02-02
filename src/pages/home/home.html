@@ -1,14 +1,39 @@
 <ion-header>
   <ion-navbar>
     <ion-title>
-      Ionic Blank
+      Weather Forecast
     </ion-title>
   </ion-navbar>
 </ion-header>
 
-<ion-content padding>
-  The world is your oyster.
-  <p>
-    If you get lost, the <a href="http://ionicframework.com/docs/v2">docs</a> will be your guide.
-  </p>
+<ion-content padding [(ngModel)]="weatherData" ngDefaultControl>
+  <h1 class="region">Knox County, Tennesse, United States</h1>
+  <ion-slides>
+    <ion-slide *ngFor="let record of weatherData">
+      <h3>{{record.dt_txt | formatDate}}</h3>
+      <h3>{{record.dt_txt | formatTime}}</h3>
+      <h3>Temperature</h3>
+      <ion-item>
+        <p item-start>Max</p>
+        <p item-end>{{record.main.temp_max | celcius | roundOff}}&deg;C</p>
+      </ion-item>
+      <ion-item>
+        <p item-start>Min</p>
+        <p item-end>{{record.main.temp_min | celcius | roundOff}}&deg;C</p>
+      </ion-item>
+      <h3>Pressure</h3>
+      <ion-item>
+        <p item-start>Sea Level</p>
+        <p item-end>{{record.main.sea_level}} hPa</p>
+      </ion-item>
+      <ion-item>
+        <p item-start>Ground Level</p>
+        <p item-end>{{record.main.grnd_level}} hPa</p>
+      </ion-item>
+      <ion-item>
+        <p item-start>Humidity</p>
+        <p item-end>{{record.main.humidity}}&#37;</p>
+      </ion-item>
+    </ion-slide>
+  </ion-slides>
 </ion-content>
